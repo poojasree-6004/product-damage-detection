@@ -1,0 +1,222 @@
+.analysis-result {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Verdict banner */
+.verdict-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+}
+.verdict-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.05;
+  background: currentColor;
+}
+.verdict-damaged {
+  border-color: rgba(255, 51, 85, 0.5);
+  color: var(--neon-red);
+  box-shadow: 0 0 20px rgba(255,51,85,0.1), inset 0 0 30px rgba(255,51,85,0.04);
+}
+.verdict-safe {
+  border-color: rgba(0,255,136,0.4);
+  color: var(--neon-green);
+  box-shadow: 0 0 20px rgba(0,255,136,0.08), inset 0 0 30px rgba(0,255,136,0.03);
+}
+.verdict-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.verdict-icon {
+  font-size: 28px;
+  line-height: 1;
+  text-shadow: 0 0 12px currentColor;
+}
+.verdict-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.verdict-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+  margin-top: 3px;
+  color: var(--text-secondary);
+}
+.verdict-scan-id { text-align: right; }
+
+/* Result cards grid */
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  gap: 12px;
+}
+
+.result-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-steel);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+.result-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-blue), transparent);
+  opacity: 0.4;
+}
+.result-card-header {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  align-self: stretch;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-steel);
+}
+.result-card-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.08em;
+}
+.result-card-wide {
+  align-items: stretch;
+}
+
+/* Confidence arc */
+.conf-arc-wrapper { width: 90px; height: 90px; }
+.conf-arc-svg { width: 100%; height: 100%; }
+
+/* Severity */
+.severity-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.severity-value {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 14px currentColor;
+}
+
+.severity-bar-container {
+  display: flex;
+  gap: 4px;
+  align-self: stretch;
+}
+.severity-segment {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.seg-fill {
+  height: 6px;
+  width: 100%;
+  background: var(--border-steel);
+  transition: background 0.3s;
+}
+.seg-active .seg-fill {
+  background: var(--seg-color);
+  box-shadow: 0 0 6px var(--seg-color);
+}
+.seg-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.seg-active .seg-label { color: var(--seg-color); }
+
+/* Integrity */
+.integrity-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.integrity-value {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-shadow: 0 0 12px currentColor;
+}
+
+/* Defect details */
+.defect-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 20px;
+}
+.defect-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.defect-val { font-size: 13px; }
+.bb-val { font-size: 11px; }
+.ts-val { font-size: 11px; }
+
+/* Machine log */
+.machine-log {
+  background: #060b10;
+  border: 1px solid var(--border-steel);
+}
+.machine-log-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border-steel);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+}
+.machine-log-body {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.log-line {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: #4a8a6a;
+  display: flex;
+  gap: 8px;
+}
+.log-prefix {
+  color: var(--neon-blue);
+  min-width: 12px;
+}
+.log-alert { color: var(--neon-red) !important; }
+.log-pass { color: var(--neon-green) !important; }
+.log-alert ~ * { color: var(--neon-red); }

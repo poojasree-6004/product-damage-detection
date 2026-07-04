@@ -1,0 +1,138 @@
+.scan-overlay {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Main scan beam */
+.scan-beam {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(0, 212, 255, 0.06) 20%,
+    rgba(0, 212, 255, 0.5) 50%,
+    rgba(0, 212, 255, 0.06) 80%,
+    transparent 100%);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.15);
+  z-index: 3;
+}
+
+/* Below-beam tint */
+.scan-beam::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(180deg, rgba(0,212,255,0.04) 0%, transparent 100%);
+}
+
+/* Grid overlay */
+.scan-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: 1;
+}
+
+/* Corner brackets */
+.scan-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: var(--neon-blue);
+  border-style: solid;
+  opacity: 0.8;
+  z-index: 4;
+}
+.scan-corner.tl { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
+.scan-corner.tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
+.scan-corner.bl { bottom: 6px; left: 6px; border-width: 0 0 2px 2px; }
+.scan-corner.br { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
+
+/* Reticle */
+.scan-reticle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+.reticle-ring {
+  position: absolute;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: var(--neon-blue);
+}
+.reticle-ring.outer {
+  width: 70px;
+  height: 70px;
+  border-width: 1px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  opacity: 0.5;
+}
+.reticle-ring.inner {
+  width: 40px;
+  height: 40px;
+  border-width: 1px;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  opacity: 0.6;
+}
+.reticle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+  animation: pulse-dot 1s infinite;
+}
+
+/* Status text */
+.scan-status-text {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--neon-blue);
+  letter-spacing: 0.2em;
+  z-index: 6;
+  text-shadow: 0 0 8px rgba(0,212,255,0.5);
+}
+
+/* Readout lines */
+.scan-readout {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 6;
+}
+.readout-line {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--neon-blue);
+  letter-spacing: 0.08em;
+  background: rgba(0,0,0,0.5);
+  padding: 1px 4px;
+}
