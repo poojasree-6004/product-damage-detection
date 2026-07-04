@@ -182,7 +182,7 @@ Output:
 
 ## Author
 
-Riddhi Poddar
+Poojasree Adareddy
 B.Tech CSE (Data Science)
 
 ---
