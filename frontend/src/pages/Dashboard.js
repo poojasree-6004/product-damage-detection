@@ -35,32 +35,58 @@ export default function Dashboard() {
   }, []);
 
   const handleAnalyze = async () => {
-    if (!imageFile) return;
-    setIsScanning(true);
-    setStatus('SCANNING...');
-    setError(null);
-    setResult(null);
-    setShowHeatmap(false);
-    setUploadProgress(0);
+  if (!imageFile) return;
 
-    try {
-      const data = await predictDamage(imageFile, (progressEvent) => {
-        const pct = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        setUploadProgress(pct);
+  setIsScanning(true);
+  setStatus("SCANNING...");
+  setError(null);
+  setResult(null);
+  setShowHeatmap(false);
+  setUploadProgress(0);
+
+  try {
+    console.log("Uploading to API...");
+
+    const data = await predictDamage(imageFile, (progressEvent) => {
+      const pct = Math.round(
+        (progressEvent.loaded * 100) / progressEvent.total
+      );
+      setUploadProgress(pct);
+    });
+
+    console.log("API SUCCESS:", data);
+
+    setResult(data);
+    setStatus("ANALYSIS COMPLETE");
+
+    setTimeout(() => {
+      analysisRef.current?.scrollIntoView({
+        behavior: "smooth",
       });
-      setResult(data);
-      setStatus('ANALYSIS COMPLETE');
-      setTimeout(() => {
-        analysisRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-    } catch (err) {
-      const msg = err.response?.data?.detail || err.message || 'Unknown error';
-      setError(`SCAN FAILED: ${msg}`);
-      setStatus('ERROR — RETRY REQUIRED');
-    } finally {
-      setIsScanning(false);
-    }
-  };
+    }, 300);
+
+  } catch (err) {
+
+    console.log("========== ERROR ==========");
+    console.log(err);
+    console.log("Message:", err.message);
+    console.log("Code:", err.code);
+    console.log("Response:", err.response);
+    console.log("Status:", err.response?.status);
+    console.log("Data:", err.response?.data);
+
+    const msg =
+      err.response?.data?.detail ||
+      err.message ||
+      "Unknown error";
+
+    setError(`SCAN FAILED: ${msg}`);
+    setStatus("ERROR — RETRY REQUIRED");
+
+  } finally {
+    setIsScanning(false);
+  }
+};
 
   const handleReset = () => {
     setImageFile(null);
